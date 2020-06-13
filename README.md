@@ -65,7 +65,7 @@ git clone or download this repository.
 
 I assume you have Python and PIP installed on your machine. If not, please do.
 Also you need to have Postgres database installed and running (if you donnot install or use Postgres db
-, an sqlite db is used intead. You can use any db of choice you like. To learn more about that, please refer to Flask-Sqlalchemy and Sqlalechemy docs.)
+, an sqlite db is used instead. You can use any db of choice you like. To learn more about that, please refer to Flask-Sqlalchemy and Sqlalechemy docs.)
 
 ```python
 pip install requirements.txt
