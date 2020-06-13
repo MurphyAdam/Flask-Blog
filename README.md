@@ -76,13 +76,13 @@ Flask enviroment variables:
 On Linux
 ```console
 foo@bar:~$ export FLASK_APP=wsgi.py
-foo@bar:~$ export FLASK_ENV=development.py
+foo@bar:~$ export FLASK_ENV=development
 ```
 
 On Windows
 ```console
 foo@bar:~$ set FLASK_APP=wsgi.py
-foo@bar:~$ set FLASK_ENV=development.py
+foo@bar:~$ set FLASK_ENV=development
 ```
 
 If everything is good, now we have to map our db models to our db of choice. Luckly this is easly done:
