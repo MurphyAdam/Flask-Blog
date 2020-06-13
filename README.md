@@ -2,18 +2,18 @@
 
 ## Introduction
 This is a Flask-based web app that supports a number of functionalities, including:
-Authentication: Sign-in, Sign-up, Forgot password, etc
-Blog CRUD: Can create blog posts using the Quill WYSIWYG
-Categories and tags for blog posts
-Save and Heart blog posts
-Comment on posts and delete comments
-Follow, and unfollow users
-Change user role, suspend and unsuspend a user, delete user
-Some good decorators such as account_state() that takes care if an account is suspended, if no, it displays a cool page informing the user.
-Adds a MASTER_PASSWORD for etc security for operations like suspending and deleting users and changing their roles
-Edit your profile, change password, delete account.
-Built-in HTTP error messages handlers
-Has support for CSRF tokens to protect you against CSRF attacks
++ Authentication: Sign-in, Sign-up, Forgot password, etc
++ Blog CRUD: Can create blog posts using the Quill WYSIWYG
++ Categories and tags for blog posts
++ Save and Heart blog posts
++ Comment on posts and delete comments
++ Follow, and unfollow users
++ Change user role, suspend and unsuspend a user, delete user
++ Some good decorators such as account_state() that takes care if an account is suspended, if no, it displays a cool page informing the user.
++ Adds a MASTER_PASSWORD for etc security for operations like suspending and deleting users and changing their roles
++ Edit your profile, change password, delete account.
++ Built-in HTTP error messages handlers
++ Has support for CSRF tokens to protect you against CSRF attacks
 
 This samlpe app is built with the [Flask Application Factory Pattern](https://flask.palletsprojects.com/en/1.1.x/patterns/appfactories/) in mind alongside the use of [Blueprints](https://flask.palletsprojects.com/en/1.1.x/blueprints/#blueprints)
 
