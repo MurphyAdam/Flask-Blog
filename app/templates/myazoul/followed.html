@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+           <div class="column">
+            {% if followed  %}
+              {% include 'underscore/_followed_card.html' %}
+                 <div class="has-padding-top-2">
+                    <div class="pagination">
+                      {{ macros.pagination_widget(pagination, '.myazoul_followed') }}
+                    </div>
+                 </div>
+            {% else %}
+            You are not following anyone yet.
+              <a href="{{url_for('main.users', _external=True)}}"> Find users</a>
+            {% endif %}
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

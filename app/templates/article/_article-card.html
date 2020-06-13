@@ -1,0 +1,166 @@
+<!-- START ARTICLE -->
+<div class="card article">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-center">
+                <img src="{{ article.author.avatar(64) }}" class="author-image" alt="Placeholder image">
+            </div>
+            <div class="media-content is-marginless has-text-centered">
+                <p class="title article-title has-padding-top-2">{{ article.title }}</p>
+                <p class="subtitle is-6 article-subtitle">
+                    <a href="{{url_for('user.profile', id=article.author.id, _external=True)}}">@{{ article.author.username }}</a> {{ moment(article.pub_date).format("LLL")}}
+                </p>
+            </div>
+        </div>
+        <div class="content article-body is-marginless ql-editor" style="height: auto; padding-top: 0px">
+            {{ article.body|safe }}
+        </div>
+
+        <div class="media">
+            <div class="media-content is-marginless has-text-centered">
+              <table class="table media-center">
+                <tbody>
+                  <tr>
+                    <th>
+                    {% if current_user.is_authenticated%}
+                     {% if current_user.is_admin()%}
+                     <div class="dropdown is-hoverable">
+                      <div class="dropdown-trigger">
+                          <svg id="i-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="black" stroke="grey" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                              <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
+                          </svg>                  
+                      </div>
+                      <div class="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                          <div class="dropdown-item">
+                            <a class="button is-small is-primary is-light is-hoverable" onclick="if (!confirm('Are you sure you want to edit this?')) { return false }" href="{{ url_for('article.edit_article', id=article.id, _external=True)}}">
+                                Edit article
+                            </a>
+                          </div>
+                          <div class="dropdown-item">
+                            <a class="button is-small is-danger is-light is-hoverable" onclick="if (!confirm('Are you sure you want to delete this?')) { return false }" href="{{ url_for('article.delete_article', id=article.id, _external=True)}}">
+                                Delete article
+                            </a>
+                          </div>
+                        </div>
+                       </div>
+                     </div>
+                     {% endif %}
+                    </th>
+                    <td>
+                       {% if not current_user.article_is_hearted(article.id) %}
+                          <span title="Heart">
+                            <button class="poor-button animated" name="heartArticle" value="{{article.id}}">
+                              <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                  <path d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" />
+                              </svg>
+                            </button>
+                          </span>
+                        {% else %}
+                        {% set post_hearts_number = article.hearted_articles.count()%}
+                          <span title="{% if post_hearts_number %} You and {{post_hearts_number - 1 }} others hearted this {% else %} Hearted {{post_hearts_number }} times {% endif %}">
+                            <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="red" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                              <path d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" />
+                            </svg>
+                            <b>{{post_hearts_number }}&nbsp;&nbsp;</b>
+                          </span>
+                       {% endif %}
+
+                      </td>
+                      <td>
+                       {% if not current_user.article_is_saved(article.id) %}
+                       <span title="Save">
+                          <button class="poor-button animated" name="saveArticle" value="{{article.id}}">
+                            <svg id="i-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                              <path d="M6 2 L26 2 26 30 16 20 6 30 Z" />
+                            </svg>
+                          </button>
+                       </span>
+                       {% else %}
+                       {% set post_saves_number = article.saved_articles.count()%}
+                          <span title="{% if post_saves_number %}You and {{post_saves_number - 1 }} others saved this {% else %} Saved {{post_saves_number }} times {% endif %}">
+                            <svg id="i-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="#00d1b2" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                              <path d="M6 2 L26 2 26 30 16 20 6 30 Z" />
+                            </svg>
+                            <b>{{post_saves_number }}&nbsp;&nbsp;</b>
+                          </span>
+                       {% endif %}
+                      </td>
+                      <td>
+                       <span title="Comment">
+                          <button class="poor-button forms-link" data-value="{{article.id}}" data-target="#commentModal" name="openCommentModal" aria-haspopup="true">
+                            <svg id="i-msg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+                            </svg>
+                          </button>
+                       </span>
+                      </td>
+                    {% endif %}
+                      <td>
+                        <div class="dropdown is-hoverable">
+                          <svg id="i-share" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z">
+                            </path>
+                          </svg>
+                          <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                              <div class="dropdown-item">
+                                  <button class="button is-small is-link is-hoverable" data-sharer="facebook" data-hashtag="LangandCode" data-url="{{ url_for('article.show_articles', id=article.id, _external=True)}}">Facebook</button>
+                              </div>
+                              <div class="dropdown-item">
+                                  <button class="button is-small is-info is-hoverable" data-sharer="twitter" data-title="{{ article.title }}" data-url="{{ url_for('article.show_articles', id=article.id, _external=True)}}">Twitter</button>
+                              </div>
+                              <div class="dropdown-item">
+                                  <button class="button is-small is-link is-hoverable" data-sharer="linkedin" data-url="{{ url_for('article.show_articles', id=article.id, _external=True)}}">Linkedin</button>
+                              </div>
+                              <div class="dropdown-item">
+                                  <button class="button is-small is-dark is-hoverable" data-sharer="email" data-title="{{ article.title }}" data-url="{{ url_for('article.show_articles', id=article.id, _external=True)}}" data-subject="{{ article.title }}" data-to="some@email.com">Email</button>
+                              </div>
+                              <div class="dropdown-item">
+                                  <button class="button is-small is-success is-hoverable" data-sharer="whatsapp" data-title="{{ article.title }}" data-url="{{ url_for('article.show_articles', id=article.id, _external=True)}}">Whatsapp</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+      <div class="media">
+            <div class="media-content is-marginless">
+              <div class="comments-container">
+                {% if article.has_comments() %}
+                  <b>Comments</b>
+                  {% for comment in article.comments %}
+                    {% include 'underscore/_comment_card.html' %}
+                  {% endfor %}
+                {% else%}
+                  <b>No comments</b>
+                {% endif %}
+              </div>
+            </div>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <p class="card-footer-item tags has-addons">
+        {% if article.category %}
+            <a href="{{url_for('article.category', category=article.category)}}">
+              <span class="tag is-black">Category</span>
+              <span class="tag is-primary is-light">{{ article.category }}</span>
+            </a>
+        {% endif %}
+      </p>
+      <p class="card-footer-item tags">
+          {% for tag in article.tags%}
+            <a class="tag is-primary is-light is-normal is-bold" href="{{url_for('article.tag', tag=tag.name, _external=True)}}">
+              <span>
+                {{ tag.name }}
+              </span>
+            </a>
+          {% endfor %}
+      </p>
+    </footer>
+</div>
+<!-- END ARTICLE -->

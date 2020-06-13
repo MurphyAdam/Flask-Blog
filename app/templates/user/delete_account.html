@@ -1,0 +1,58 @@
+<!-- UPDATE PASSWORD  FORM STARTS HERE -->
+{% extends "layout.html" %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <!-- DELETE ACCOUNT FORM STARTS HERE -->
+        <div class="columns is-centered">
+          <div class="column is-one-third">
+            <div class="card">
+             <div class="card-content">
+                <h1 class="title sign-in-up-title is-4">
+                  <svg id="i-alert" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                      <path d="M16 3 L30 29 2 29 Z M16 11 L16 19 M16 23 L16 25" />
+                  </svg>
+                  Delete your account
+                </h1>
+               <form class="" id="updateUserPasswordForm" action="{{url_for('user.delete_account', _external=True)}}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                 <div class="field">
+                   <p>
+                     <span>
+                     <strong>Your email</strong>
+                     </span>
+                     <input class="input homemade-input" name="email" type="email" minlength="8" autocomplete="off" placeholder="Email" required="true">
+                   </p>
+                 </div>
+                 <div class="field">
+                   <p>
+                     <span>
+                     <strong>Password</strong>
+                     </span>
+                     <input class="input homemade-input" name="password" type="password" minlength="8" placeholder="Password" required="true">
+                   </p>
+                 </div>
+                 <div class="field">
+                  <p>
+                   <span>
+                    <strong>Reasons and motives</strong>
+                   </span>
+                   <input class="input homemade-input" name="reason" type="text" minlength="8" placeholder="Reasons and motives you wish to delete your account" required="true">
+                  </p>
+                 </div>
+                 <div class="field">
+                  <p class="control">
+                   <input type="submit" class="button homemade-button is-danger is-light" name="delete" value="Delete">
+                  </p>
+                 </div>
+               </form>
+               <button class="modal-close is-medium" aria-label="close"></button>
+             </div>
+           </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    {% endblock %}

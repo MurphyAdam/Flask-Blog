@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+  {% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-multiline">
+           <div class="column is-half">
+                {% include 'underscore/_saved_articles_card.html' %}
+           </div>
+          {% if current_user.is_admin() %}
+           <div class="column is-half">
+                {% include 'underscore/_my_articles_card.html' %}
+           </div>
+          {% endif %}
+           <div class="column is-half">
+                {% include 'underscore/_followed_card.html' %}
+             </div>
+           <div class="column is-half">
+                {% include 'underscore/_followers_card.html' %}
+           </div>
+      </div>
+     </div>
+    </div>
+{% endblock %}

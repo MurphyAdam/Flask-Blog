@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+           <div class="column">
+            {% if reports  %}
+              {% for report in reports %}
+                <div class="card">
+                  <div class="card-content">
+                    <h1 class="title is-4 has-padding-top-1">Report <span style="color:#00d1b2;">#</span>{{report.id}}<span class="float-right">Reported {{report.reported.username}} ({{report.reported.fullname}})</span></h1>
+                    <h1 class="title is-6 has-padding-top-1">Subject</h1>
+                    <p class="subtitle">
+                      {{report.subject}}
+                    </p>
+                    <h1 class="title is-6 has-padding-top-1">Body</h1>
+                    <p class="subtitle">
+                      {{report.body}}
+                    </p>
+                    <a class="button is-small is-primary is-light is-hoverable is-outlined" href="{{ url_for('admin.show_reported_users', _external=True) }}">Show</a>
+                  </div>
+                </div>
+              {% endfor %}
+                 <div class="has-padding-top-2">
+                    <div class="pagination">
+                      {{ macros.pagination_widget(pagination, '.show_reported_users') }}
+                    </div>
+                 </div>
+            {% else %}
+            No reported users seem to exist so far.
+            {% endif %}
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<div class="card is-shady">
+    <div class="card-content">
+      <p class="title is-4">
+        <svg id="i-work" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M30 8 L2 8 2 26 30 26 Z M20 8 C20 8 20 4 16 4 12 4 12 8 12 8 M8 26 L8 8 M24 26 L24 8" />
+        </svg>
+        My Articles
+        {% if current_user.articles.count() > 0 %}
+          ({{ current_user.articles.count() }})
+        {% endif %}
+      </p>
+      <p>
+       {% if my_articles %}
+         <ul>
+          {% for article in my_articles %}
+            <li class="has-padding-bottom-1">
+              <a class="undecorated-link" style="text-decoration: none;" href="{{url_for('article.show_articles', id=article.id, _external=True)}}">
+                <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
+                </svg>
+                {{ article.title }}
+              </a>
+            </li>
+          {% endfor %}
+         </ul>
+        <div class="has-margin-top-1">
+          <svg id="i-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <circle cx="17" cy="15" r="1" />
+              <circle cx="16" cy="16" r="6" />
+              <path d="M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z" />
+          </svg>
+          <a href="{{url_for('user.myazoul_my_articles')}}">See all</a>
+        </div>
+       {% else %}
+         You have not written any articles yet.
+         <a href="{{url_for('article.add_article', _external=True)}}"> Write an article</a>
+       {% endif %}
+      </p>
+  </div>
+</div>

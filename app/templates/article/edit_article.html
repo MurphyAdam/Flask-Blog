@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block footer_js %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/quill/_write_article.js', _external=True)}}"></script>
+{% endblock footer_js %}
+{% block body %}
+ <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <div class="message is-black">
+            <div class="message-header">
+              Written by {{ article.author.username }}
+            </div>
+            <div class="message-body">
+              <!-- ARTICLE FORM STARTS HERE -->
+              <form class="" id="writeArticleForm" action="{{ url_for('article.edit_article', id=article.id, _external=True)}}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <div class="field has-padding-top-1">
+                  <h1 class="title sign-in-up-title is-4">
+                    Article Title
+                  </h1>
+                    <input class="input homemade-input-dark" name="articleTitle" type="text" value="{{ article.title}}" placeholder="Article title">
+                </div>
+                <div class="field has-padding-top-1"></div>
+                  <h1 class="title sign-in-up-title is-4">
+                    Article Body
+                  </h1>
+                <div id="editor-container">{{ article.body|safe }}</div>
+                <input type="hidden" name="articleBody">
+                <div class="field has-padding-top-1">
+                  <h1 class="title sign-in-up-title is-4">
+                    Article Category
+                  </h1>
+                    <input class="input homemade-input-dark" name="articleCategory" type="text" value="{{ article.category }}" placeholder="Article category">
+                </div>
+                <div class="field has-padding-top-1">
+                  <h1 class="title sign-in-up-title is-4">
+                    Article Tags
+                  </h1>
+                    <input class="input homemade-input-dark" name="articleTags" type="text" value="{{article.tags_string}}" placeholder="Article tags. Separate by comma. No space between.">
+                </div>
+                <div class="field has-padding-top-1">
+                 <h1 class="title sign-in-up-title is-4">
+                    Language Option
+                 </h1>
+                 <div class="select is-hoverable is-bold">
+                  <select name="articleLanguageOption">
+                    <option disabled selected value="">Language</option>
+                    <option name="english" selected value="english">English</option>
+                    <option name="arabic" value="arabic">Arabic</option>
+                    <option name="ma" value="ma">Moroccan Arabic</option>
+                  </select>
+                 </div>
+               </div>
+                <div class="field has-padding-top-1">
+                 <h1 class="title sign-in-up-title is-4">
+                    Update
+                 </h1>
+                 <div class="select is-hoverable is-bold">
+                  <select name="articlePublicationOption">
+                    <option disabled selected value="">Publication Option</option>
+                    <option name="publish" value="publish">Publish</option>
+                    <option name="draft" value="draft">draft</option>
+                  </select>
+                 </div>
+               </div>
+               <div class="field has-padding-top-1">
+                <input type="submit" name="update" value="Update" class="button is-bold is-black">
+               </div>
+              </form>
+            </div>
+          </div>
+          <!-- ARTICLE FORM ENDS HERE -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

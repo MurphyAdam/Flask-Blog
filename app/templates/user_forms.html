@@ -1,0 +1,59 @@
+
+<!-- COMMENT FORM STARTS HERE -->
+<div class="modal" id="commentModal">
+    <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box forms-box has-shadow">
+          <div class="columns is-centered">
+            <div class="column is-two-thirds">
+              <h1 class="title sign-in-up-title is-4">
+                Comment on this post
+              </h1>
+              <form class="" id="commentForm" method="post" action="{{url_for('article.comment', _external=True)}}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <div class="field has-padding-top-1">
+                  <span>
+                     <strong>Comment</strong>
+                  </span>
+                  <textarea class="textarea" autocomplete="off"
+                        name="commentBody" minlength="10" placeholder="Write something..."></textarea>
+                  <input type="hidden" name="postId" id="postId" value="">
+                </div>
+                <div class="field has-padding-top-1">
+                  <p class="control">
+                    <input type="submit" class="button is-bold is-primary is-light" id="commentOnPost" name="commentOnPost" value="Comment">
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <button class="modal-close is-medium" aria-label="close"></button>
+    </div>
+</div>
+<!-- COMMENT FORM ENDS HERE -->
+
+<!-- LOGOUT MODAL STARTS HERE -->
+<div class="modal" id="logoutModal">
+<div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box forms-box has-shadow">
+        <div class="content has-text-centered">
+            <p>
+            "Uncertainty is inherently unsustainable. Eventually, everything either is or isn't."
+            </p>
+            <h1 class="title sign-in-up-title is-4">
+              Confirm logout
+            </h1>
+            <a name="confirm" class="button is-bold is-primary is-light"  href="{{url_for('auth.signout', _external=True)}}">
+              Confirm
+            </a>
+            <button name="goback" class="button is-bold is-danger is-light go-back" aria-label="close">
+              Go back
+            </button>
+        </div>
+      </div>
+      <button class="modal-close is-medium" aria-label="close"></button>
+    </div>
+  </div>
+<!-- LOGOUT MODAL ENDS HERE -->

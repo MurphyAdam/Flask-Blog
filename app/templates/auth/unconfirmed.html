@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+    <div class="columns is-centered">
+     <div class="column is-one-third">
+       <div class="card hoverable">
+        <div class="card-content">
+          <p class="title is-4">Email Confirmation needed</p>
+          <div class="notification is-primary is-bold">
+            <button class="delete"></button>
+            <div>
+                You need to activate your account. An email has been sent to your email ({{current_user.email}}). For security reasons, you need to reach to it while you're still logged in on the same device.
+                <p>
+                   The confirmation link becomes invalid in one hour. If you need a reconfirmation link, you would have to access to "forgot password" and ask for a new one.
+                </p>
+            </div>
+          </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div> 
+{% endblock %}

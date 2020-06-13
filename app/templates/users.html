@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+  {% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+  	  {% if current_user.is_authenticated %}
+        {% if users %}
+  	     <div class="columns is-multiline">
+    	       {% for user in users %}
+               {% include 'underscore/_user_card.html' %}
+             {% endfor %}
+         </div>
+         <div class="has-padding-top-2">
+            <div class="pagination">
+              {{ macros.pagination_widget(pagination, '.users') }}
+            </div>
+         </div>
+        {% endif %}
+       {% endif %}
+   </div>
+ </div>
+{% endblock %}

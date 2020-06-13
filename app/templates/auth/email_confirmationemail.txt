@@ -1,0 +1,11 @@
+Dear {{ user.fullname.split()[0] }},
+
+You can confirm your Lang&Code account by clicking on the following link 
+
+{{ link }}
+
+Please do not reply to this email.
+
+Sincerely,
+
+The Lang&Code Team

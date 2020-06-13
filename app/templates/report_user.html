@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <!-- ADD WORDS FORM STARTS HERE -->
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <div class="card">
+             <div class="card-content">
+              <h1 class="title sign-in-up-title is-4">
+                Report user {{user.username}}
+              </h1>
+              <div id="result" class=""></div>
+              <form class="" id="reportUserForm" action="{{ url_for('user.report_user', id=user.id, _external=True)}}" method="post">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+               <div class="field">
+                <p>
+                  <span>
+                    <strong>Subject</strong>
+                  </span>
+                <div class="select is-hoverable is-bold">
+                  <select name="subject" required="true">
+                    <option disabled selected value="">Subject</option>
+                    <option name="abuse" value="abuse">Abuse</option>
+                    <option name="spam" value="spam">Spam</option>
+                    <option name="vulgarLanguageContent" value="vulgar-language-content">Vulgar language content</option>
+                    <option name="other" value="other">other</option>
+                  </select>
+                </div>
+              </p>
+              </div>
+              <div class="field has-padding-top-1">
+                <p>
+                  <span>
+                    <strong>Body</strong>
+                  </span>
+                  <textarea class="textarea homemade-textarea" autocomplete="off" name="body" placeholder="Why are you reporting this user."></textarea>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <button class="button homemade-button is-primary" name="reportUser" id="reportUser">
+                    Report
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ADD WORD FORM ENDS HERE -->
+{% endblock %}

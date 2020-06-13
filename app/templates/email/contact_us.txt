@@ -1,0 +1,8 @@
+Contact us
+New contact us email recieved
+{{ subject }}
+
+{{body}}
+    
+by {{fullname}} ({{email}})
+     

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+  {% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+            <div class="columns">
+              <div class="column is-one-third">
+               <div class="card">
+                 <div class="card-content">
+                   <p class="title is-4">
+                    <svg id="i-info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M16 14 L16 23 M16 8 L16 10" />
+                        <circle cx="16" cy="16" r="14" />
+                    </svg>
+                    Instructions               
+                   </p>
+                   <p>
+                    <ul>
+                      <li class="is-homemade-font-blink">
+                        <span class="is-bold">Username</span>: Usernames must be 4 characters minimum and must have only letters, numbers, and/ or underscores
+                      </li>
+                      <li class="is-homemade-font-blink">
+                        <span class="is-bold">Email</span>: A valid email address with which you haven't already registered on our website. (unless you have deleted your account)
+                      </li>
+                      <li class="is-homemade-font-blink">
+                        <span class="is-bold">Password</span>: Passwords must be 8 characters minimum and a mixture of both letters, numbers and special characters
+                      </li>
+                    </ul>
+                   </p>
+                 </div>
+               </div>
+              </div>
+              <div class="column is-two-thirds">
+               <div class="card">
+                 <div class="card-content">
+                  <h1 class="title sign-in-up-title is-4">
+                    <svg id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
+                        <circle cx="16" cy="24" r="1" />
+                    </svg>
+                    Sign up
+                  </h1>
+                  <form class="" id="signupForm" action="{{url_for('auth.signup', _external=True)}}" method="post">
+                  <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                  <div class="field">
+                    <p>
+                      <span>
+                      <strong>Full name</strong>
+                      </span>
+                      <input type="text" class="input homemade-input" minlength="3" name="fullname" placeholder="Fullname" required="true">
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p>
+                      <span>
+                        <strong>Username</strong>
+                      </span>
+                      <input type="text" class="input homemade-input" minlength="6" name="username" placeholder="Username" required="true">
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p>
+                      <span>
+                        <strong>Email</strong>
+                      </span>
+                      <input type="email" class="input homemade-input" minlength="6" name="email" placeholder="Email" required="true">
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p>
+                      <span>
+                        <strong>Password</strong>
+                      </span>
+                      <input type="password" class="input homemade-input" minlength="8" name="password" placeholder="Password" required="true">
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p>
+                      <span>
+                        <strong>Confirm password</strong>
+                      </span>
+                      <input type="password" class="input homemade-input" minlength="8" name="password2" placeholder="Confirm password" required="true">
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <button class="button is-primary is-light is-bold">
+                        Sign up
+                      </button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+         </div>
+       </div>
+     </div>
+  </div>
+{% endblock %}

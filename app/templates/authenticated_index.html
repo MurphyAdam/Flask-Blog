@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      {% if current_user.is_authenticated %}
+      <div class="columns is-marginless">
+        <div class="column is-one-third">
+        {% if g.confirm_account %}
+         <div class="notification animated heartBeat">
+          <svg id="i-info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M16 14 L16 23 M16 8 L16 10" />
+              <circle cx="16" cy="16" r="14" />
+          </svg>
+          {{g.confirm_account}}
+        </div>
+        {% endif %}
+        <!-- Control bar starts here : notifications, CRUD etc -->
+        {% include 'underscore/_control_bar.html' %}
+        <!-- Control bar ends here : notifications, CRUD etc -->
+          </div>
+          <div class="column is-two-thirds">
+            {% if latest_articles %}
+              {% for article in latest_articles %}
+                  {% include 'article/_article-card.html' %}
+              {% endfor %}
+            {% endif %}
+            {% if not latest_articles %}
+             <div class="card">
+                <div class="card-content">
+                  <p class="title is-6">
+                    No new articles to fetch so far.
+                  </p>
+                </div>
+             </div>
+            {% endif %}                  
+          </div>
+        </div>
+        <div class="columns is-marginless is-multiline">
+          {% if latest_articles_list  %}
+            {% for result in latest_articles_list %}
+              <div class="column is-one-third">
+                {% include 'article/_preview_article_card.html' %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+ <div class="column is-half">
+    <div class="card is-shady animated slideInLeft">
+      <div class="card-content">
+        <div class="media">
+            <div class="media-center">
+                <img src="{{ user.avatar(64) }}" class="author-image" alt="Placeholder image">
+            </div>
+            <div class="media-content is-marginless has-padding-top-1">
+                <p class="subtitle is-6 article-subtitle has-text-centered">
+                    <a href="{{url_for('user.profile', id=user.id, _external=True)}}">@{{ user.username }}</a>
+                     {% if user.is_admin() %} 
+                     <span class="has-tooltip-dark" data-tooltip="Admin">
+                        <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M2 20 L12 28 30 4" />
+                        </svg>
+                      </span>
+                     {% endif %}
+                     {% if user.is_suspened() %} 
+                     <span title="Suspended">
+                        <svg id="i-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M2 30 L30 2 M30 30 L2 2" />
+                        </svg>
+                      </span>
+                     {% endif %}
+                </p>
+                {% if user != current_user %}
+                 <div class="dropdown is-right float-right is-hoverable">
+                  <div class="dropdown-trigger">
+                    <button class="poor-button">
+                      <svg id="i-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="black" stroke="grey" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                          <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
+                      </svg>                  
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                      <div class="dropdown-item">
+                        <a href="{{url_for('user.report_user', id=user.id)}}">Report user</a>
+                      </div>
+                      {% if user != current_user and current_user.is_admin() %} 
+                      <div class="dropdown-item">
+                          <a class="button is-small is-warning is-hoverable" name="changeUserRole" onclick="if (!confirm('Are you sure you want to CHANGE this user ROLE?')) { return false }" href="{{ url_for('admin.user_change_role', id=user.id, _external=True)}}">
+                            Change role
+                          </a>
+                      </div>
+                      {% if not user.is_suspened() %}
+                      <div class="dropdown-item">
+                          <a class="button is-small is-warning is-hoverable" name="SuspendUser" onclick="if (!confirm('Are you sure you want to SUSPEND this user?')) { return false }" href="{{ url_for('admin.suspend_user', id=user.id, _external=True)}}">
+                            Suspend user
+                          </a>
+                      </div>
+                      {% else %}
+                      <div class="dropdown-item">
+                          <a class="button is-small is-warning is-hoverable" name="UnsuspendUser" onclick="if (!confirm('Are you sure you want to UNSUSPEND this user?')) { return false }" href="{{ url_for('admin.unsuspend_user', id=user.id, _external=True)}}">
+                            Unsuspend user
+                          </a>
+                      </div>
+                      {% endif %}
+                      <div class="dropdown-item">
+                          <a class="button is-small is-danger is-hoverable" name="changeUserRole" onclick="if (!confirm('Are you sure you want to DELETE this user?')) { return false }" href="{{ url_for('admin.delete_user', id=user.id, _external=True)}}">
+                            Delete user
+                          </a>
+                      </div>
+                      {% endif %}
+                    </div>
+                   </div>
+                 </div>
+                {% endif %}
+               <div class="subtitle is-left has-padding-top-1 is-6" name="displayAboutMe" id="displayAboutMe">
+                {% if user.about_me %}
+                  {{user.about_me}}
+                {% else %}
+                  - No bio
+                {% endif %}               
+               </p>
+               <p class="has-padding-top-1">
+                  <small class="subtitle is-6">Active {% if user.last_seen %}
+                  {{ moment(user.last_seen).fromNow() }}{% endif %}</small>
+               </p>
+               <p class="has-padding-top-1">
+                 <span class="tag is-primary is-normal is-bold undecorated-link">{{ user.followers.count() }} followers </span>
+                 <span class="tag is-primary is-normal is-bold undecorated-link"> {{ user.followed.count() }} following </span>
+                 {% if current_user.is_authenticated() and user != current_user and user.is_following(current_user) %}
+                 <span class="tag is-light is-normal is-bold undecorated-link">Follows you</span>
+                 {% endif %}
+               </p>
+               <p class="has-padding-top-1">
+                {% if user == current_user %}
+                    <a class="button forms-link is-small is-info is-light is-hoverable is-outlined" href="{{url_for('user.settings', _external=True)}}#updateProfileHeader">
+                     Edit profile
+                    </a>
+                {% elif not current_user.is_following(user) %}
+                    <button class="button is-small is-info is-light is-hoverable is-outlined" id="{{user.id}}" name="followUser" value="{{user.id}}" href="#">Follow</button>
+                {% else %}
+                    <button class="button is-small is-info is-light is-hoverable is-outlined" id="{{user.id}}" name="unfollowUser" value="{{user.id}}" href="#">Unfollow</button>
+                {% endif %}
+              </div>
+      </div>
+   </div>
+ </div>
+</div>
+</div>

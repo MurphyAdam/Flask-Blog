@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <!-- SUSPEND USER FORM STARTS HERE -->
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <h1 class="title sign-in-up-title is-4 is-danger">
+              Suspend user {{user.username}}
+            </h1>
+            <form class="" id="changeUserRoleForm" action="{{ url_for('admin.suspend_user', id=user.id, _external=True)}}" method="post">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Master Password</strong>
+                  </span>
+                  <input type="password" class="input homemade-input" name="masterPassword" placeholder="Master Password" required="true">
+                </p>
+                </p>
+              </div>
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Note</strong>
+                  </span>
+                  <textarea class="textarea homemade-textarea" autocomplete="off" name="note" placeholder="Why this user is being suspended"></textarea>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <input type="submit" class="button homemade-button is-primary" name="suspendUser" id="suspendUser" value="Suspend user">
+                </p>
+              </div>
+          </form>
+        </div>
+      </div>
+    <!-- ADD WORD FORM ENDS HERE -->
+{% endblock %}

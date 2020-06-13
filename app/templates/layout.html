@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="langandcode.com">
+    <meta name="copyright" content="Copyright (c) 2019 Adam Clark">
+    <meta name="author" content="Adam Clark">
+    <meta name="theme-color" content="white">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/icons/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="keywords" content="programming, Python, language, Arabic, Moroccan Arabic, Darija, English, Stemming, NLP, Dictionary, Translation, Morocco, Maroc, المغرب, دارجة, الدارجة">
+    <link rel="icon" type="image/x-icon" sizes="200x200" href="{{url_for('static', filename='img/logo2.png', _external=True)}}">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/homemade/homemade.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/homemade/spacing.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/quill.snow.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/animate.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bulma-0.8.0/css/bulma.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sweetalert2.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/highlight/styles/monokai-sublime.css
+', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/homemade/__bulma-alter.min.css', _external=True)}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/blog.min.css', _external=True)}}">
+    {% block head_css %}
+    {% endblock %}
+    {% block head_js %}
+    {% endblock %}
+</head>
+
+<body>
+    {% include 'underscore/_navbar.html' %}
+    <div class="container" id="app">
+        {% block body %}
+        {% endblock %}
+        <!-- MODAL FORMS  -->
+        {% if current_user.is_authenticated %}
+        {% include "user_forms.html" %}
+        {% endif %}
+        {% include 'underscore/_footer.html' %}
+    </div>
+    <script src="{{url_for('static', filename='js/jquery/jquery-3.4.1.min.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/jquery/jquery.validate.min.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/jquery/jquery.form.min.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/moment.min.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/highlight/highlight.pack.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/quill/quill.min.js', _external=True)}}"></script>
+    <script src="{{url_for('static', filename='js/sweetalert2.min.js', _external=True)}}"></script>
+    {{ moment.include_moment() }}
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    {% block footer_js %}
+    {% endblock %}
+    {% if current_user.is_authenticated %}
+    <script type="text/javascript">
+        const currentUserIsLoggedIn = true;
+    </script>
+    <script src="{{url_for('static', filename='js/homemade/homemade.main.min.js', _external=True)}}"></script>
+    {% endif %}
+    <script src="{{url_for('static', filename='js/homemade/homemade.min.js', _external=True)}}"></script>
+</body>
+
+</html>

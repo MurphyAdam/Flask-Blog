@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+           <div class="column">
+                <div class="card">
+                  <div class="card-content">
+                    {% if contact  %}
+                      {% if contact.is_user %}
+                        <h1 class="title is-4 has-padding-top-1">User <span style="color:#00d1b2;">#</span>{{contact.user_id}} {{contact.fullname}}</h1>
+                      {% else %}
+                        <h1 class="title is-4 has-padding-top-1">User {{contact.fullname}}</h1>
+                      {% endif %}
+                      <p class="subtitle">
+                        {{contact.body}}
+                        <span class="float-right">{{ moment(contact.contact_date).format("LLL")}}</span>
+                      </p>
+                    {% else %}
+                    Contact was not found
+                    {% endif %}
+                  </div>
+                </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

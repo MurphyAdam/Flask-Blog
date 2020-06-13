@@ -1,0 +1,56 @@
+<div class="card is-shady">
+    <section class="hero is-info is-marginless gradient is-small">
+        <a class="none" href="{{url_for('article.show_articles', id=result.id, _external=True)}}">
+            <div class="hero-body diplay-flex">
+                <div class="container">
+                    <h1 class="subtitle is-small is-black">
+                        {{result.title}}
+                    </h1>
+                </div>
+            </div>
+        </a>
+    </section>
+    <div class="card-content is-marginless">
+        <div class="media-content is-marginless">
+            <div class="content">
+                <p>
+                    <small class="subtitle is-6">
+                        {{ moment(result.pub_date).format("LLL")}}
+                    </small>
+                    {% if current_user.is_authenticated %}
+                    {% if not current_user.article_is_saved(result.id) %}
+                    <button class="poor-button float-right animated" name="saveArticle" value="{{result.id}}">
+                        <svg id="i-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M6 2 L26 2 26 30 16 20 6 30 Z" />
+                        </svg>
+                    </button>
+                    {% endif %}
+                    {% endif %}
+                </p>
+                <div>
+                    <p class="has-padding-top-1">
+                        {% set post_hearts_number = result.hearted_articles.count()%}
+                        {% if post_hearts_number %}
+                        <span title="{% if current_user.is_authenticated %}{% if current_user.article_is_hearted(result.id) %}You and {{post_hearts_number - 1 }} others hearted this {% endif %} {% else %} Hearted {{post_hearts_number }} times {% endif %}">
+                            <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="red" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <path d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" />
+                            </svg>
+                            <b>{{post_hearts_number }}&nbsp;&nbsp;</b>
+                        </span>
+                        {% endif %}
+                        {% set post_saves_number = result.saved_articles.count()%}
+                        {% if post_saves_number %}
+                        <span title="{% if current_user.is_authenticated %}{% if current_user.article_is_saved(result.id) %}You and {{post_saves_number - 1 }} others saved this {% endif %} {% else %} Saved {{post_saves_number }} times {% endif %}">
+                            <svg id="i-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="#00d1b2" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <path d="M6 2 L26 2 26 30 16 20 6 30 Z" />
+                            </svg>
+                            <b>{{post_saves_number }}&nbsp;&nbsp;</b>
+                        </span>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="has-padding-bottom-1"></div>
+            </div>
+        </div>
+    </div>
+</div>

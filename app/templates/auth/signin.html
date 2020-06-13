@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+  {% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+        <div class="columns is-centered">
+          <div class="column is-one-third">
+            <div class="card">
+             <div class="card-content">
+              <h1 class="title sign-in-up-title is-4">
+                <svg id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
+                    <circle cx="16" cy="24" r="1" />
+                </svg>
+                 Sign in
+               </h1>
+               <form class="" id="signinForm" action="{{url_for('auth.signin', _external=True)}}" method="post">
+                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                 <div class="field">
+                   <p>
+                     <span>
+                      <strong>Email</strong>
+                     </span>
+                     <input class="input homemade-input" name="email" type="email" placeholder="Email">
+                    </p>
+                  </div>
+                 <div class="field">
+                   <p>
+                      <span>
+                        <strong>Password</strong>
+                     </span>
+                     <input class="input homemade-input" minlength="8" name="password" type="password" placeholder="Password">
+                   </p>
+                 </div>
+                  <div class="field">
+                   <label class="checkbox">
+                     <input class="" name="rememberMe" type="checkbox">
+                      Remember me
+                   </label>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <input type="submit" class="button is-primary is-light is-bold" name="signin" value="Login">
+                    </p>
+                    <p class="has-padding-top-1">
+                      <a class="is-link forms-link go-back" href="{{url_for('auth.reset_password_request', _external=True)}}">
+                        Forgot password
+                      </a>
+                      <a class="is-link has-padding-left-2" href="{{url_for('auth.signup', _external=True)}}">Sign up</a>
+                    </p>
+                  </div>
+                </form>
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

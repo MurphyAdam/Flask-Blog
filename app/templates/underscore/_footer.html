@@ -1,0 +1,87 @@
+<footer class="footer">
+  <div class="columns is-marginless is-multiline">
+    <div class="column is-one-third">
+        <div class="column">
+          <div class="message-body">
+             <p class="title is-4">
+                <svg id="i-tag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                      <circle cx="24" cy="8" r="2" />
+                    <path d="M2 18 L18 2 30 2 30 14 14 30 Z" />
+                </svg>
+                Tags                
+              </p>
+              <p>
+                 {% if g.tags  %}
+                   <ul>
+                     <li>
+                       <p class="tags">
+                         {% for tag in g.tags  %}
+                            <a class="tag is-primary is-light is-normal is-bold" style="text-decoration: none;" href="{{url_for('article.tag', tag=tag.name, _external=True)}}">
+                              <span>
+                                {{ tag.name }}
+                              </span>
+                            </a>
+                          {% endfor %}
+                        </p>
+                      </li>
+                   </ul>
+                 {% endif %}
+                 {% if not g.tags %}
+                   No tags to display.
+                 {% endif %}
+                </p>
+             </div>
+           </div>
+        <div class="column">
+          <div class="message-body">
+             <p class="title is-4">
+                <svg id="i-folder-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M4 28 L28 28 30 12 14 12 10 8 2 8 Z M28 12 L28 4 4 4 4 8" />
+                </svg>
+                Categories                
+              </p>
+              <p>
+                 {% if g.categories  %}
+                   <ul>
+                     <li>
+                       <p class="tags">
+                         {% for category in g.categories  %}
+                            <a class="tag is-primary is-light is-normal is-bold" style="text-decoration: none;" href="{{url_for('article.category', category=category.name, _external=True)}}">
+                              <span>
+                                {{ category.name }}
+                              </span>
+                            </a>
+                          {% endfor %}
+                        </p>
+                      </li>
+                   </ul>
+                 {% endif %}
+                 {% if not g.categories %}
+                   No categories to display.
+                 {% endif %}
+                </p>
+             </div>
+           </div>
+         </div>
+       <div class="column is-one-third">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Lang&Code</strong>. Built from scratch. By <a href="https://github.com/MurphyAdam"> Majdi</a>.
+          </p>
+          <p>
+            All rights reserved. 2020
+          </p>
+          <div>
+            Made with
+            <div class="animated heartBeat infinite">
+              <span>
+                <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="red" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+       </div>
+     </div>
+</footer>

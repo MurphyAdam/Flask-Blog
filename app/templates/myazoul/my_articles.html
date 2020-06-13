@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+           <div class="column">
+            {% if my_articles  %}
+              {% include 'underscore/_my_articles_card.html' %}
+                 <div class="has-padding-top-2">
+                    <div class="pagination">
+                      {{ macros.pagination_widget(pagination, '.myazoul_my_articles') }}
+                    </div>
+                 </div>
+            {% else %}
+                   You have not written any articles yet.
+                   <a href="{{url_for('article.add_article', _external=True)}}"> Write an article</a>
+            {% endif %}
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

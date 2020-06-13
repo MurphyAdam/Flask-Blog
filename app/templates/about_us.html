@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <div class="card hoverable">
+            <div class="card-content">
+              <div class="ql-editor" style="height: auto;">
+                <h>{{about_us.company_editable_about_us|safe}}</h>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

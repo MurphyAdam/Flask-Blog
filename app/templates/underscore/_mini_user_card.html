@@ -1,0 +1,35 @@
+
+<div class="card is-shady">
+ <div class="card-content">
+  <h6 class="is-subtitle is-small has-padding-bottom-1">
+    {% if date %}
+     On {{ moment(date).format("LLL")}}
+    {% endif %}
+  </h6>
+   <div class="media">
+     <div class="media-left">
+       <figure class="image is-48x48">
+         <img src="{{ user.avatar(64) }}">
+       </figure>
+     </div>
+     <div class="media-content is-marginless">
+      <div class="content">
+       <p class="title is-4">
+         <a class="tag is-black is-normal is-bold" href="{{url_for('user.profile', id=user.id, _external=True)}}">
+          {{ user.fullname }}
+         </a>
+         <p class="subtitle is-6">@{{ user.username }}
+         {% if user.is_admin() %} 
+         <span title="Admin">
+            <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#00d1b2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M2 20 L12 28 30 4" />
+            </svg>
+          </span>
+         {% endif %}
+         </p>
+       </p>
+    </div>
+ </div>
+</div>
+</div>
+</div>

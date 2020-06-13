@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <!-- ADD WORDS FORM STARTS HERE -->
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <div class="card">
+             <div class="card-content">
+              <h1 class="title sign-in-up-title is-4">
+                Contact us
+              </h1>
+              <div id="result" class=""></div>
+              <form class="" id="contactUsForm" action="{{ url_for('main.contact_us', _external=True)}}" method="post">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+              <div class="field">
+                <p>
+                  <span>
+                  <strong>Subject</strong>
+                  </span>
+                  <input type="text" class="input homemade-input" name="subject" placeholder="Subject">
+                </p>
+              </div>
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Body</strong>
+                  </span>
+                  <textarea class="textarea homemade-textarea" autocomplete="off" name="body" placeholder="Your message body goes here"></textarea>
+                </p>
+              </div>
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Fullname</strong>
+                  </span>
+                  {% if current_user.is_authenticated %}
+                    <input type="text" class="input homemade-input" name="fullname" value="{{current_user.fullname}}" placeholder="Your fullname">
+                  {% else %}
+                    <input type="text" class="input homemade-input" name="fullname" placeholder="Your fullname">
+                  {% endif %}
+                </p>
+              </div>
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Email</strong>
+                  </span>
+                  {% if current_user.is_authenticated %}
+                    <input type="email" class="input homemade-input" name="email" value="{{current_user.email}}" placeholder="Your email">
+                  {% else %}
+                    <input type="email" class="input homemade-input" name="email" placeholder="Your email">
+                  {% endif %}
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <button class="button homemade-button is-primary" name="sendEmail" id="sendEmail">
+                    Send
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ADD WORD FORM ENDS HERE -->
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <!-- CHANGE USER ROLE FORM STARTS HERE -->
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <h1 class="title sign-in-up-title is-4">
+              Change {{user.username}} user role
+            </h1>
+            <form class="" id="changeUserRoleForm" action="{{ url_for('admin.user_change_role', id=user.id, _external=True)}}" method="post">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+              <div class="field">
+                <p>
+                  <span>
+                  <strong>Role id</strong>
+                  </span>
+                  <input type="number" class="input homemade-input" name="roleId" placeholder="User role id" required="true">
+                </p>
+              </div>
+              <div class="field">
+                <p>
+                  <span>
+                    <strong>Master Password</strong>
+                  </span>
+                  <input type="password" class="input homemade-input" name="masterPassword" placeholder="Master Password" required="true">
+                </p>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <input type="submit" class="button homemade-button is-primary" name="changeUserRole" id="changeUserRole" value="Change role">
+                </p>
+              </div>
+          </form>
+        </div>
+      </div>
+    <!-- ADD WORD FORM ENDS HERE -->
+{% endblock %}

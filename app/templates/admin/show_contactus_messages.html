@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+           <div class="column">
+            {% if contacts  %}
+              {% for c in contacts %}
+                <div class="card">
+                  <div class="card-content">
+                    {% if c.is_user %}
+                      <h1 class="title is-4 has-padding-top-1">User <span style="color:#00d1b2;">#</span>{{c.user_id}} {{c.fullname}}</h1>
+                    {% else %}
+                      <h1 class="title is-4 has-padding-top-1">User {{c.fullname}}</h1>
+                    {% endif %}
+                    <p class="subtitle">
+                      {{c.body}}
+                      <span class="float-right">{{ moment(c.contact_date).format("LLL")}}</span>
+                    </p>
+                    <p>
+                      <a class="button is-small is-primary is-hoverable is-outlined" href="{{ url_for('admin.show_contactus_message', id=c.id, _external=True) }}">Show</a>
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+                 <div class="has-padding-top-2">
+                    <div class="pagination">
+                      {{ macros.pagination_widget(pagination, '.show_contactus_messages') }}
+                    </div>
+                 </div>
+            {% else %}
+            No new contactus emails seem to exist.
+            {% endif %}
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

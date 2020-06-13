@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+{% block body %}
+  <div class="has-padding-top-2"></div>
+  <div class="section has-padding-top-2">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+              {% if multiple_articles %}
+                {% for article in multiple_articles %}
+                   {% include 'article/_article-card.html' %}
+                {% endfor %}
+                   <div class="pagination">
+                    {{ macros.pagination_widget(pagination, '.tag', tag=tag) }}
+                   </div>
+              {% endif %}
+              {% if article %}
+                   {% include 'article/_article-card.html' %}
+              {% endif %}
+              {% if not article and not multiple_articles %}
+                 <h6 class="subtitle is-6 has-padding-top-1">
+                 No articles to view yet. <a href="{{url_for('main.index', _external=True)}}"> Head back home</a>
+                 </h6>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

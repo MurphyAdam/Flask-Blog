@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+  {% block body %}
+<div class="has-padding-top-2"></div>
+  <div class="section">
+    <div class="container">
+      {% include 'underscore/_flash_messages.html' %}
+  	  <div class="columns">
+        {% include 'underscore/_user_card.html' %}
+        {% if user == current_user %}
+          {% include 'underscore/_user_settings_card.html' %}
+        {% endif %}
+  	  </div>
+  </div>
+</div>
+{% endblock %}
