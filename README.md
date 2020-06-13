@@ -9,7 +9,7 @@ This is a Flask-based web app that supports a number of functionalities, includi
 + Comment on posts and delete comments
 + Follow, and unfollow users
 + Change user role, suspend and unsuspend a user, delete user
-+ Some good decorators such as account_state() that takes care if an account is suspended, if no, it displays a cool page informing the user.
++ Some good decorators such as account_state() that takes care if an account is suspended, if yes, it displays a cool page informing the user.
 + Adds a MASTER_PASSWORD for etc security for operations like suspending and deleting users and changing their roles
 + Edit your profile, change password, delete account.
 + Built-in HTTP error messages handlers
